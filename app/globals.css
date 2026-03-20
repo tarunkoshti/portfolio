@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #dadada;
+  --foreground: #0f0f0f;
 }
 
-@theme inline {
+.dark {
+  --background: #0f0f0f;
+  --foreground: #dadada;
+}
+
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-marcellus: var(--font-marcellus);
+  --font-caveat: var(--font-caveat);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.bg-noise {
+  background-image: url("/images/image.png");
+  background-size: cover;
+  background-color: #1e1e1e;
+}
+
+.dark .bg-noise {
+  background-image: url("/images/image.png");
+}
+
+/* Reusable Ticket Corner Shape */
+@utility ticket-corner {
+  --corner-size: 20px;
+
+  /* 1px feathering is crucial for rotated elements to avoid jagged lines */
+  -webkit-mask:
+    radial-gradient(circle at top left, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) top left,
+    radial-gradient(circle at top right, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) top right,
+    radial-gradient(circle at bottom left, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) bottom left,
+    radial-gradient(circle at bottom right, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) bottom right;
+
+  mask:
+    radial-gradient(circle at top left, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) top left,
+    radial-gradient(circle at top right, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) top right,
+    radial-gradient(circle at bottom left, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) bottom left,
+    radial-gradient(circle at bottom right, #0000 var(--corner-size), #000 calc(var(--corner-size) + 1px)) bottom right;
+
+  -webkit-mask-size: 51% 51%;
+  mask-size: 51% 51%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  /* Performance & Rendering Fixes */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@utility ticket-border {
+  --border-width: 1.5px;
+  --ticket-border-color: currentColor;
+
+  background-image:
+    /* Corners */
+    radial-gradient(circle at top left, var(--ticket-border-color) calc(var(--corner-size) + var(--border-width)), #0000 calc(var(--corner-size) + var(--border-width) + 1px)),
+    radial-gradient(circle at top right, var(--ticket-border-color) calc(var(--corner-size) + var(--border-width)), #0000 calc(var(--corner-size) + var(--border-width) + 1px)),
+    radial-gradient(circle at bottom left, var(--ticket-border-color) calc(var(--corner-size) + var(--border-width)), #0000 calc(var(--corner-size) + var(--border-width) + 1px)),
+    radial-gradient(circle at bottom right, var(--ticket-border-color) calc(var(--corner-size) + var(--border-width)), #0000 calc(var(--corner-size) + var(--border-width) + 1px)),
+    /* Sides */
+    linear-gradient(to bottom, var(--ticket-border-color), var(--ticket-border-color)),
+    linear-gradient(to bottom, var(--ticket-border-color), var(--ticket-border-color)),
+    linear-gradient(to right, var(--ticket-border-color), var(--ticket-border-color)),
+    linear-gradient(to right, var(--ticket-border-color), var(--ticket-border-color));
+
+  background-position:
+    top left, top right, bottom left, bottom right,
+    top center, bottom center, center left, center right;
+
+  background-size:
+    51% 51%, 51% 51%, 51% 51%, 51% 51%,
+    100% var(--border-width),
+    100% var(--border-width),
+    var(--border-width) 100%,
+    var(--border-width) 100%;
+
+  background-repeat: no-repeat;
 }

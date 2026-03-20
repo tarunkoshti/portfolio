@@ -1,0 +1,150 @@
+"use client"
+
+import React from 'react';
+import Link from "next/link";
+import { Github, Linkedin, MessageCircle } from "lucide-react";
+import { TicketShape } from "@/components/ui/ticket-shape";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+// Register ScrollTrigger for client-side use
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
+
+const Intro = () => {
+    const containerRef = React.useRef<HTMLDivElement>(null);
+    const lineRefH = React.useRef<(HTMLDivElement | null)[]>([]);
+    const lineRefV = React.useRef<(HTMLDivElement | null)[]>([]);
+    const textLinesRef = React.useRef<(HTMLSpanElement | null)[]>([]);
+    const socialRef = React.useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        // ScrollTrigger pinning
+        ScrollTrigger.create({
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            pin: true,
+            pinSpacing: false,
+        });
+
+        // Entrance animation
+        const tl = gsap.timeline({ paused: true });
+
+        tl.from(lineRefV.current, {
+            scaleY: 0,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: "expo.out",
+            transformOrigin: "top"
+        })
+        .from(lineRefH.current[0], {
+            scaleX: 0,
+            duration: 1.5,
+            ease: "expo.out",
+            transformOrigin: "left"
+        }, "-=1.2")
+        .from(lineRefH.current[1], {
+            scaleX: 0,
+            duration: 1.5,
+            ease: "expo.out",
+            transformOrigin: "right"
+        }, "-=1.2")
+        .from(textLinesRef.current, {
+            y: 100,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power4.out"
+        }, "-=1")
+        .from(socialRef.current?.children || [], {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "back.out(1.7)"
+        }, "-=0.5");
+
+        const startAnimation = () => tl.play();
+        window.addEventListener('loaderFinished', startAnimation);
+        return () => window.removeEventListener('loaderFinished', startAnimation);
+
+    }, { scope: containerRef });
+
+    return (
+        <section id="home" ref={containerRef} className="bg-noise relative min-h-screen w-full overflow-hidden z-10">
+
+            {/* horizontal lines */}
+            <div ref={(el) => { lineRefH.current[0] = el; }} className="absolute top-1/6 left-0 w-full h-[1.5px] bg-foreground/10 z-10" />
+            <div ref={(el) => { lineRefH.current[1] = el; }} className="absolute top-1/2 left-0 w-full h-[1.5px] bg-foreground/10 z-10" />
+
+            {/* vertical lines */}
+            <div ref={(el) => { lineRefV.current[0] = el; }} className="absolute top-0 left-1/6 w-[1.5px] h-full bg-foreground/10 z-10" />
+            <div ref={(el) => { lineRefV.current[1] = el; }} className="absolute top-0 right-1/6 w-[1.5px] h-full bg-foreground/10 z-10" />
+
+            {/* corner social links */}
+            <div ref={socialRef} className="absolute top-1/2 left-5/6 w-1/6 h-1/6 z-10" >
+                <div className="absolute left-1/4 w-[1.5px] h-4/5 bg-foreground/10 z-10 flex flex-col items-center">
+                    <TicketShape
+                        as={Link}
+                        href="https://github.com/tarunkoshti"
+                        target="_blank"
+                        cornerSize="6px"
+                        style={{ "--ticket-border-color": "var(--foreground)" } as any}
+                        className="absolute -bottom-8 p-2 ticket-border bg-transparent text-foreground transition-all duration-300 -rotate-12 hover:rotate-0 flex items-center justify-center hover:bg-foreground hover:text-background"
+                    >
+                        <Github size={20} />
+                    </TicketShape>
+                </div>
+                <div className="absolute left-1/2 w-[1.5px] h-2/3 bg-foreground/10 z-10 flex flex-col items-center">
+                    <TicketShape
+                        as={Link}
+                        href="https://wa.me/918870407148"
+                        target="_blank"
+                        cornerSize="6px"
+                        style={{ "--ticket-border-color": "var(--foreground)" } as any}
+                        className="absolute -bottom-8 p-2 ticket-border bg-transparent text-foreground transition-all duration-300 rotate-6 hover:rotate-0 flex items-center justify-center hover:bg-foreground hover:text-background"
+                    >
+                        <MessageCircle size={20} />
+                    </TicketShape>
+                </div>
+                <div className="absolute left-3/4 w-[1.5px] h-4/5 bg-foreground/10 z-10 flex flex-col items-center">
+                    <TicketShape
+                        as={Link}
+                        href="https://linkedin.com/in/tarun-koshti"
+                        target="_blank"
+                        cornerSize="6px"
+                        style={{ "--ticket-border-color": "var(--foreground)" } as any}
+                        className="absolute -bottom-8 p-2 ticket-border bg-transparent text-foreground transition-all duration-300 rotate-12 hover:rotate-0 flex items-center justify-center hover:bg-foreground hover:text-background"
+                    >
+                        <Linkedin size={20} />
+                    </TicketShape>
+                </div>
+            </div>
+
+            {/* headline */}
+            <div className="absolute top-44 left-1/6 w-4/6 h-1/3 z-20 flex justify-center items-center">
+                <h2 className="text-5xl md:text-7xl text-center overflow-hidden">
+                    <span ref={(el) => { textLinesRef.current[0] = el; }} className="text-lg md:text-xl block mb-6 text-foreground/50 normal-case">
+                        Hello! I'm
+                    </span>
+                    <span ref={(el) => { textLinesRef.current[1] = el; }} className="font-caveat tracking-wider block ">Tarun Koshti</span>
+                    <span ref={(el) => { textLinesRef.current[2] = el; }} className=" tracking-wider block uppercase font-bold">a web developer</span>
+                </h2>
+            </div>
+
+            {/* about me */}
+            <div className="absolute top-1/2 left-1/6 w-4/6 h-1/3 z-20 flex justify-center items-center text-foreground/50 overflow-hidden">
+                <p ref={(el) => { textLinesRef.current[3] = el; }} className="px-16 text-base text-center md:text-lg lg:text-xl leading-relaxed text-foreground/70">
+                    A web developer with experience in building scalable web applications,
+                    with modern user interfaces and user experiences.
+                </p>
+            </div>
+
+        </section>
+    );
+};
+
+export default Intro;
