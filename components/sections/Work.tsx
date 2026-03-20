@@ -121,7 +121,7 @@ const Work = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 90%",
+                start: "top 70%",
                 toggleActions: "play none none reverse"
             }
         });
@@ -132,22 +132,22 @@ const Work = () => {
             duration: 1,
             ease: "power4.out"
         })
-        .from(".project-card", {
-            y: 60,
-            opacity: 0,
-            scale: 0.95,
-            duration: 1.2,
-            stagger: {
-                amount: 0.8,
-                from: "start"
-            },
-            ease: "power3.out"
-        }, "-=0.6");
+            .from(".project-card", {
+                y: 60,
+                opacity: 0,
+                scale: 0.95,
+                duration: 1.2,
+                stagger: {
+                    amount: 0.8,
+                    from: "start"
+                },
+                ease: "power3.out"
+            }, "-=0.6");
     }, { scope: containerRef });
 
     return (
-        <section 
-            id="work" 
+        <section
+            id="work"
             ref={containerRef}
             className="w-full py-24 px-6 md:px-[16.66%] flex flex-col justify-center overflow-hidden relative z-10 bg-black"
         >
@@ -192,11 +192,11 @@ const Work = () => {
                                 >
                                     <TicketShape
                                         cornerSize="16px"
-                                        className={`ticket relative p-8 h-full min-h-[520px] flex flex-col items-start justify-between gap-8 shadow-sm transition-shadow duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:shadow-2xl ${bgClass} ${titleColor}`}
+                                        className={`ticket relative p-6 md:p-8 h-full min-h-[450px] md:min-h-[550px] flex flex-col items-start justify-between gap-6 md:gap-8 shadow-sm transition-shadow duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:shadow-2xl ${bgClass} ${titleColor}`}
                                     >
-                                        <div className="flex flex-col items-start gap-8 w-full">
+                                        <div className="flex flex-col items-start gap-6 md:gap-8 w-full">
                                             {/* Project Image Container */}
-                                            <div className="relative w-full aspect-[4/3] md:aspect-video overflow-hidden shadow-inner group-hover:shadow-lg transition-all duration-500">
+                                            <div className="relative w-full aspect-[3/2] md:aspect-[4/3] md:aspect-video overflow-hidden shadow-inner group-hover:shadow-lg transition-all duration-500">
                                                 <img
                                                     src={project.image}
                                                     alt={project.title}
@@ -208,15 +208,15 @@ const Work = () => {
                                             </div>
 
                                             {/* Decorative Corner Label */}
-                                            <div className={`absolute top-4 right-6 font-mono text-[10px] uppercase tracking-widest ${labelColor}`}>
+                                            <div className={`absolute top-2 md:top-4 right-6 font-mono text-[10px] uppercase tracking-widest ${labelColor}`}>
                                                 {project.code}
                                             </div>
 
-                                            <div className="flex flex-col items-start text-left gap-3 z-10 w-full">
+                                            <div className="flex flex-col items-start text-left gap-2 md:gap-3 z-10 w-full">
                                                 <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight leading-none group-hover:tracking-wider transition-all duration-500">
                                                     {project.title}
                                                 </h2>
-                                                <p className={`text-sm md:text-base opacity-70 leading-relaxed line-clamp-4`}>
+                                                <p className={`text-sm md:text-base opacity-70 leading-relaxed md:line-clamp-4`}>
                                                     {project.description}
                                                 </p>
                                             </div>

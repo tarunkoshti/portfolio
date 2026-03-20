@@ -36,27 +36,79 @@ const Skill = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top 90%",
-                toggleActions: "play none none reverse"
-            }
+        const mm = gsap.matchMedia();
+
+        // Desktop Animation: Cards burst from the center at an angle
+        mm.add("(min-width: 768px)", () => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 50%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            tl.from(".skill-title", {
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "power4.out"
+            });
+
+            const cards = gsap.utils.toArray<HTMLElement>(".skill-card");
+
+            // Card 1 (Left - Frontend): Moves from center up to the left
+            tl.from(cards[0], {
+                x: "110%",
+                y: 32, // Moves from Card 2's horizontal level if starting at center
+                opacity: 0,
+                duration: 1.5,
+                ease: "power4.out"
+            }, "-=0.6");
+
+            // Card 3 (Right - Tools): Moves from center down to the right
+            tl.from(cards[2], {
+                x: "-110%",
+                y: -32,
+                opacity: 0,
+                duration: 1.5,
+                ease: "power4.out"
+            }, "<");
+
+            // Card 2 (Middle - Backend): Scales and fades in place
+            tl.from(cards[1], {
+                y: 40,
+                opacity: 0,
+                scale: 0.9,
+                duration: 1.5,
+                ease: "power4.out"
+            }, "<");
         });
 
-        tl.from(".skill-title", {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power4.out"
-        })
-            .from(".skill-card", {
-                y: 60,
+        // Mobile Animation: Simple stagger fade up
+        mm.add("(max-width: 767px)", () => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            tl.from(".skill-title", {
+                y: 40,
                 opacity: 0,
-                duration: 1.2,
-                stagger: 0.2,
-                ease: "power3.out"
-            }, "-=0.6");
+                duration: 1,
+                ease: "power4.out"
+            })
+                .from(".skill-card", {
+                    y: 60,
+                    opacity: 0,
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: "power3.out"
+                }, "-=0.6");
+        });
     }, { scope: sectionRef });
 
     return (

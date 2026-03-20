@@ -17,7 +17,7 @@ const Experience = () => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: sectionRef.current,
-                start: "top 80%",
+                start: "top 50%",
                 toggleActions: "play none none reverse"
             }
         });
@@ -40,7 +40,7 @@ const Experience = () => {
                 duration: 1,
                 stagger: 0.2,
                 ease: "power3.out"
-            }, "-=0.4");
+            }, "-=0.6");
     }, { scope: sectionRef });
 
     return (
