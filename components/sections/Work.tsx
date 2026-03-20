@@ -244,6 +244,8 @@ const Work = () => {
                                     key={globalIndex}
                                     ref={(el) => { cardsRef.current[globalIndex] = el; }}
                                     href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     onMouseEnter={() => setHoveredIndex(globalIndex)}
                                     className={`project-card relative flex flex-col ${flexClass} w-full group`}
                                 >

@@ -91,6 +91,7 @@ const Intro = () => {
                         as={Link}
                         href="https://github.com/tarunkoshti"
                         target="_blank"
+                        rel="noopener noreferrer"
                         cornerSize="5px"
                         style={{ "--ticket-border-color": "var(--foreground)" } as any}
                         className="absolute -bottom-8 p-1.5 md:p-2 ticket-border bg-transparent text-foreground transition-all duration-300 -rotate-12 hover:rotate-0 flex items-center justify-center hover:bg-foreground hover:text-background"
@@ -103,6 +104,7 @@ const Intro = () => {
                         as={Link}
                         href="https://wa.me/918827407148"
                         target="_blank"
+                        rel="noopener noreferrer"
                         cornerSize="5px"
                         style={{ "--ticket-border-color": "var(--foreground)" } as any}
                         className="absolute -bottom-8 p-1.5 md:p-2 ticket-border bg-transparent text-foreground transition-all duration-300 rotate-6 hover:rotate-0 flex items-center justify-center hover:bg-foreground hover:text-background"
@@ -115,6 +117,7 @@ const Intro = () => {
                         as={Link}
                         href="https://linkedin.com/in/tarun-koshti"
                         target="_blank"
+                        rel="noopener noreferrer"
                         cornerSize="5px"
                         style={{ "--ticket-border-color": "var(--foreground)" } as any}
                         className="absolute -bottom-8 p-1.5 md:p-2 ticket-border bg-transparent text-foreground transition-all duration-300 rotate-12 hover:rotate-0 flex items-center justify-center hover:bg-foreground hover:text-background"

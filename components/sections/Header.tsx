@@ -156,9 +156,9 @@ const Header = () => {
                                 {/* Bottom Socials */}
                                 <div className="border-t border-dashed border-black/30 px-4 py-3 md:px-8 md:py-4 flex justify-between items-center bg-black/5">
                                     <div className="flex gap-4">
-                                        <Link href="https://wa.me/918827407148" target="_blank" className="hover:opacity-50 transition-opacity"><MessageCircle size={16} /></Link>
-                                        <Link href="https://linkedin.com/in/tarun-koshti" target="_blank" className="hover:opacity-50 transition-opacity"><Linkedin size={16} /></Link>
-                                        <Link href="https://github.com/tarunkoshti" target="_blank" className="hover:opacity-50 transition-opacity"><Github size={16} /></Link>
+                                        <Link href="https://wa.me/918827407148" target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity"><MessageCircle size={16} /></Link>
+                                        <Link href="https://linkedin.com/in/tarun-koshti" target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity"><Linkedin size={16} /></Link>
+                                        <Link href="https://github.com/tarunkoshti" target="_blank" rel="noopener noreferrer" className="hover:opacity-50 transition-opacity"><Github size={16} /></Link>
                                     </div>
                                     <span className="text-[8px] md:text-[10px] text-black/40 uppercase tracking-widest">
                                         ©2026
