@@ -118,31 +118,88 @@ const Work = () => {
     }, { dependencies: [hoveredIndex], scope: containerRef });
 
     useGSAP(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 70%",
-                toggleActions: "play none none reverse"
-            }
+        const mm = gsap.matchMedia();
+
+        // Desktop: Row-by-row burst animation
+        mm.add("(min-width: 768px)", () => {
+            // Animate title first
+            gsap.from(".work-title", {
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "power4.out"
+            });
+
+            // Animate each row individually as it comes into view
+            const rows = gsap.utils.toArray<HTMLElement>(".project-row");
+            rows.forEach((row) => {
+                const cards = gsap.utils.toArray<HTMLElement>(".project-card", row);
+                
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: row,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                // Left card moves from center
+                tl.from(cards[0], {
+                    x: "110%",
+                    y: 20,
+                    opacity: 0,
+                    duration: 1.5,
+                    ease: "power4.out"
+                })
+                // Right card moves from center
+                .from(cards[2], {
+                    x: "-110%",
+                    y: -20,
+                    opacity: 0,
+                    duration: 1.5,
+                    ease: "power4.out"
+                }, "<")
+                // Middle card scales in place
+                .from(cards[1], {
+                    y: 40,
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 1.5,
+                    ease: "power4.out"
+                }, "<");
+            });
         });
 
-        tl.from(".work-title", {
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power4.out"
-        })
+        // Mobile: Simple staggered fade-up
+        mm.add("(max-width: 767px)", () => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            tl.from(".work-title", {
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "power4.out"
+            })
             .from(".project-card", {
                 y: 60,
                 opacity: 0,
-                scale: 0.95,
-                duration: 1.2,
-                stagger: {
-                    amount: 0.8,
-                    from: "start"
-                },
+                duration: 1,
+                stagger: 0.2,
                 ease: "power3.out"
             }, "-=0.6");
+        });
+
     }, { scope: containerRef });
 
     return (
