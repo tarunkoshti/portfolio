@@ -124,7 +124,7 @@ const Contact = () => {
                                         <a href="https://linkedin.com/in/tarun-koshti" target="_blank" rel="noopener noreferrer" className="text-sm font-mono underline underline-offset-4 text-foreground/80 hover:text-foreground transition-colors">
                                             LinkedIn
                                         </a>
-                                        <a href="https://wa.me/918870407148" target="_blank" rel="noopener noreferrer" className="text-sm font-mono underline underline-offset-4 text-foreground/80 hover:text-foreground transition-colors">
+                                        <a href="https://wa.me/918827407148" target="_blank" rel="noopener noreferrer" className="text-sm font-mono underline underline-offset-4 text-foreground/80 hover:text-foreground transition-colors">
                                             WhatsApp
                                         </a>
                                     </div>
