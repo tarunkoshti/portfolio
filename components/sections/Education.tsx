@@ -39,7 +39,7 @@ const Education = () => {
 
     const educationData = [
         {
-            year: "2018 — 2022",
+            year: "2020 — 2024",
             degree: "Bachelor of Technology",
             university: "Sagar Institute of Research, Technology & Science",
             location: "Bhopal, MP, India",
@@ -47,7 +47,7 @@ const Education = () => {
             description: "Studied programming, algorithms, databases, operating systems, and computer networks over four years of computer science."
         },
         {
-            year: "2016 — 2018",
+            year: "2019 — 2020",
             degree: "Higher Secondary",
             university: "Saraswati Higher Secondary School",
             location: "Gadarwara, MP, India",
