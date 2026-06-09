@@ -5,7 +5,7 @@ import { TicketButton } from "@/components/ui/ticket-button";
 
 const ResumeButton = () => {
     const handleOpenResume = () => {
-        window.open("https://drive.google.com/file/d/1R-PlBbHnSGlv43ZfaaXFN6QH4ZQILHjk/view?usp=drivesdk", "_blank");
+        window.open("https://drive.google.com/file/d/1C56uVhl2ANf_WGjcceFVnt9ZiFOYkEbl/view?usp=drive_link", "_blank");
     };
 
     return (
