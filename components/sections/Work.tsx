@@ -58,7 +58,7 @@ const Work = () => {
             title: "Evexia",
             description: "Evexia is a fitness and wellness platform offering programs across yoga, boxing, swimming and medical condition and more, helping users access different fitness services in one place.",
             image: "/images/evexia.png",
-            link: "https://evexialifestyles.ae/",
+            link: "https://evexialifestyles.com/",
             code: "PRJ-06"
         },
         {
